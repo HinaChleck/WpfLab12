@@ -1,0 +1,54 @@
+﻿<Window x:Class="WpfLab12.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfLab12"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="CheckBox" x:Key="CheckBoxStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid Height="Auto">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="26"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Rectangle Grid.Row="0"  Width="20" Height="20" RadiusX="3" RadiusY="3" Stroke ="Gray" StrokeThickness="2" Margin="3"/>
+                            <Path x:Name="cross" Height="13" Width="13" Stroke="Gray" StrokeThickness="3" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0">
+                                <Path.Data>
+                                    <GeometryGroup>
+                                        <LineGeometry  StartPoint="0,13" EndPoint="13,0"/>
+                                        <LineGeometry  StartPoint="0,0" EndPoint="13,13"/>
+                                    </GeometryGroup>
+                                </Path.Data>
+                            </Path>
+                            <Ellipse x:Name="circle" Width="10" Height="10" Fill="Gray" Opacity="0"/>
+                            <ContentPresenter Grid.Row="1" Content="{TemplateBinding Content}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="cross" Property="Opacity" Value="1"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="{x:Null}"><!--indeterminate-->
+                                <Setter TargetName="circle" Property="Opacity" Value="1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <StackPanel Orientation="Horizontal">
+        <CheckBox Content="Checked" Margin="20" IsChecked="{x:Null}"/>
+        <CheckBox Content="UnChecked"  Margin="20" IsChecked="{x:Null}"/>
+        <CheckBox Content="Indeterminate"  Margin="20" IsChecked="{x:Null}"/>
+        <Border Width="3" Background="Gray"/>
+        <CheckBox Content="Checked" Margin="20" Style="{StaticResource CheckBoxStyle}" IsChecked="{x:Null}"/>
+        <CheckBox Content="UnChecked"  Margin="20" Style="{StaticResource CheckBoxStyle}" IsChecked="{x:Null}"/>
+        <CheckBox Content="Indeterminate"  Margin="20" Style="{StaticResource CheckBoxStyle}" IsChecked="{x:Null}"/>
+    </StackPanel>
+</Window>
